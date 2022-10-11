@@ -1,0 +1,21 @@
+{
+    "HELLO": "Hola",
+    "CONTAINER": "Contenedor",
+    "LP": "License Plate",
+    "LOCATION":"Locacion",
+    "INV_LOCATION":"Locacion invalida",
+    "DEST_LOC":"Locacion de destino",
+    "SOURCE_LOC":"Locacion de origen",
+    "EMPTY_DATA": "Dato en blanco",
+    "API_FAILURE": "Falla en API",
+    "ENTER_LOCATION": "Ingrese locacion",
+    "ENTER_ITEM": "Ingrese item",
+    "ENTER_CONTAINER": "Ingrese contenedor",
+    "ENTER_QUANTITY": "Ingrese cantidad",
+    "WORK_ASSIG_PICK": "You have a work assignment for other process.",
+    "CONTINUE": "Continuar",
+    "UNASSIGNMENT": "Desasignar",
+    "WORK_UNASSIGNMENT": "Work desasignado",
+    "ITEM_SAVE_NEW": "Item grabado, ingrese nuevo item",
+    "ITEM_IN_FORK": "Items en fork, contactar Soporte TI"
+  }

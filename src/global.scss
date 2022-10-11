@@ -16,7 +16,6 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +23,45 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+/*
+ * App CSS
+ * ----------------------------------------------------------------------------
+ * Imports a file that can contain Sass/CSS that should be used throughout
+ * the entire app.
+ */
+
+@import "./app/app.scss";
+
+.text-success {
+    color: green
+  }
+  .text-danger {
+    color: red
+  }
+  .text-primary {
+    color: #3880ff
+  }
+  .text-secondary {
+    color: #3dc2ff  }
+
+  [hidden] {
+      display: none !important;
+    }
+  
+  #main-content {
+    width: 100%;
+  }
+
+ 
+ 
+ //this works for alertHeader when inspecting in the browser
+ .alertHeader .alert-title.sc-ion-alert-md {
+   font-weight: 800;
+ }
+ .my-custom-class .alert-wrapper{
+  input{
+    text-transform: uppercase;
+  }
+}

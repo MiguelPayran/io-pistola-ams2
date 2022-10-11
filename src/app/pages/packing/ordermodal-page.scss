@@ -1,0 +1,17 @@
+.match{
+    background-color: rgb(131, 218, 131);
+    color: black;
+    border-radius: 17px;  
+    font: bolder;
+}
+
+.noMatch{
+    background-color: rgb(255, 109, 109); 
+    border-radius: 17px;  
+    font: bolder;
+    color: black;
+    font: lighter;
+    border-right-width: 30px;
+     //width: 500px;
+     //width: 600px;
+}

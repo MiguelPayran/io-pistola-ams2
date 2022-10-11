@@ -1,0 +1,25 @@
+<ion-header translucent="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-icon (click)="presentAlertConfirm()" size="large" class="ion-padding-start" name="search"></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><b>Inventory</b></ion-title>
+    <ion-button class="ion-padding-end" slot="end" (click)="confirm()" size="md">Close</ion-button>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="isloading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="table-container">
+    <div class="card-container" *ngFor="let items of inventoryData">
+      <p align="center"><span>LOC:</span> {{items.locationId}}</p>
+      <p align="center"><span>LP:</span> {{items.huId || 'Empty'}}</p>
+      <p align="center"><span>UPC:</span> {{items.displayItemNumber}}</p>
+      <!-- <p align="center"></p> -->
+      <p align="center"><span>ALO:</span> {{items.allocatedQuantity}} <span>QTY:</span> {{items.actualQuantity}}</p>
+    </div>
+  </div>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

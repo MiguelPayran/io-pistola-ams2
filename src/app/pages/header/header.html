@@ -1,0 +1,15 @@
+<ion-header *ngIf="showHeader" translucent="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><b>{{pageTitle}}</b></ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="ion-margin-end" (click)="openInventory()" slot="start" src="../../../assets/icons/box-inventory.svg"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon class="ion-padding-horizontal" (click)="emitEventToChild()" slot="start" name="refresh-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="spin" type="indeterminate"></ion-progress-bar>
+</ion-header>

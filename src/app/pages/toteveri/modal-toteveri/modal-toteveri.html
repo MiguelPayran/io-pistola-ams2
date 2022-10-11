@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-title><b>Tote Detail</b></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ams-form" style="margin-top: 2px;">
+        <form [formGroup]="formGroup">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <pistola-input [myForm]="formGroup" label="Wave" nameControl="wave">
+              </pistola-input>
+             </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <pistola-input [myForm]="formGroup" label="Location" nameControl="location">
+              </pistola-input>  </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+
+  </div>
+</ion-content>

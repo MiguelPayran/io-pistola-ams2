@@ -1,0 +1,40 @@
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-title><b>Details</b></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ams-form">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <b>UPC</b>
+            </ion-col>
+            <ion-col>
+              <b>Quantity</b>
+            </ion-col>
+            <ion-col>
+              <b>Adjust</b>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let detail of data.details">
+            <ion-col>{{detail.displayItemNumber}}
+            </ion-col>
+            <ion-col>{{detail.quantity}}
+            </ion-col>
+            <ion-col>
+              <ion-button color="medium" (click)="adjust(detail.displayItemNumber)">Adjust</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

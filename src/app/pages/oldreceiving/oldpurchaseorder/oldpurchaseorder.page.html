@@ -1,0 +1,67 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+
+
+          <pistola-client [myForm]="formGroup" nameControl="client" (sendMessage)="validateClient($event)"
+          #client></pistola-client>
+
+
+      <!-- <ion-list>
+        <ion-list-header>
+          <ion-label>
+            <b>Client Selection</b>
+          </ion-label>
+        </ion-list-header>      
+        <ion-item>
+          <ion-label>Select Client</ion-label>
+          <ion-select placeholder="Select One" #clientSelect [(ngModel)]="selectedClient" [ngModelOptions]="{standalone: true}">
+            <ion-select-option *ngFor="let client of clients" [value]="client">{{client.clientName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list> -->
+    </ion-col>
+  </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <pistola-location [myForm]="formGroup" nameControl="location" (sendMessage)="validateLocation($event)"
+            uppercase #location></pistola-location>
+        </ion-col>
+        <ion-col>
+          <pistola-input [myForm]="formGroup" label="PO Number" nameControl="ponumber"
+            (sendMessage)="validatePONumber($event)" #ponumber></pistola-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <pistola-item [myForm]="formGroup" nameControl="item" (sendMessage)="validateItem($event)" [clientId]="this.selectedClient?.data.clientId" #item>
+          </pistola-item>
+        </ion-col>
+        <ion-col size="6">
+          <pistola-qty [myForm]="formGroup" nameControl="quantity" [maxValue]='maxQty'
+            (sendMessage)="validateQuantity($event)" #quantity></pistola-qty>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <pistola-lp [myForm]="formGroup" label="LP" nameControl="lp" (sendMessage)="validateLP($event)" [newLP]='true'
+            #lp>
+          </pistola-lp>
+        </ion-col>
+        <ion-col class="ion-align-self-center  ion-text-center">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

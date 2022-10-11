@@ -1,29 +1,95 @@
-<ion-app>
+<ion-app [class.ams-theme]="amsTheme">
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button>
+              <img src="../assets/img/logos/ams3.png" height='24' width='24'>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>AMS</ion-title>
+        </ion-toolbar>
+      </ion-header>
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+        <ion-list *ngIf="loggedIn" lines="none">
+          <ion-list-header>
+            Apps
+          </ion-list-header>
+          <div *ngFor="let p of appPages; let i = index">
+            <ion-menu-toggle autoHide="false" *ngIf="p.url?.length > 0">
+              <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root" detail="false">
+                <ion-icon slot="start" [name]="p.icon + '-outline'"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-item button *ngIf="p.subPages?.length > 0" color="#5d3154" (click)="p.open = !p.open"
+              [class.active-parent]="p.open" deail="false">
+              <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+              <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+              <ion-label color="#5d3154">{{p.title}}</ion-label>
+            </ion-item>
+            <ion-list *ngIf="p.open">
+              <ion-menu-toggle autoHide="false" *ngFor="let s of p.subPages">
+                <ion-item  style="padding-left: 15px;" [routerLink]="s.url" routerLinkActive="selected" routerDirection="root" detail="false">                  
+                  <ion-icon slot="start" [name]="s.icon + '-outline'"></ion-icon>
+                  <ion-label>
+                    {{s.title}}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-list>
+          </div>
+        </ion-list>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+        <ion-list *ngIf="!loggedIn" lines="none">
+          <ion-list-header>
+            Account
+          </ion-list-header>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/login" routerLinkActive="selected" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="log-in"></ion-icon>
+              <ion-label>
+                Login
+              </ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list>
       </ion-content>
+      <ion-footer>
+        <ion-list lines="none">
+        <ion-row>
+
+          <ion-col size="3">
+            <ion-select [(ngModel)]="languague" (ionChange)="changeLanguage()" placeholder="Languague">
+              <ion-select-option value="en">EN</ion-select-option>
+              <ion-select-option value="es">ES</ion-select-option>
+            </ion-select>
+
+          </ion-col>
+          <ion-col *ngIf="loggedIn">
+              <ion-menu-toggle autoHide="false">
+                <ion-item button (click)="logout()" detail="false">
+                  <ion-label style="text-align: right;">Logout({{username}}) <ion-icon slot="end" name="log-out">
+                    </ion-icon>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+      </ion-footer>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+
+
+    <div id="main-content">
+      <pistola-header (refreshClicked)='refresh($event)'></pistola-header>
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+
   </ion-split-pane>
+
 </ion-app>

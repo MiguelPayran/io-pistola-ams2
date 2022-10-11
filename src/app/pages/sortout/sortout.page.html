@@ -1,0 +1,40 @@
+<form [formGroup]="formGroup">
+    <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+        <ion-grid #grid>
+            <ion-row>
+                <ion-col class="ion-align-self-center">
+                    <p class="message" [innerHTML]= "message"></p>
+                </ion-col>
+              </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                    <pistola-location [myForm]="formGroup" label="{{ 'SOURCE_LOC' | translate }}"
+                        nameControl="sourceLocation" (sendMessage)="validateLocation($event)"
+                        #sourceLocation></pistola-location>
+                </ion-col>
+                <ion-col size="6">
+                    <pistola-lp [myForm]="formGroup" nameControl="tote" [label]="labelTote"
+                        (sendMessage)="validateTote($event)"
+                        [checkLocation]="getValueInput('sourceLocation')" #tote></pistola-lp>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                    <ion-list>
+                        <pistola-item [myForm]="formGroup" (sendMessage)="validateItem($event)"  #item  [detail] = "false">
+                        </pistola-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-list>
+                        <pistola-input [myForm]="formGroup" nameControl="destLocation" [label]="labelDestLocation"
+                            (sendMessage)="validateDestLocation($event)"
+                            [textCompare]="workData.destinationLocation" #destLocation></pistola-input>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</form>

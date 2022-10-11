@@ -1,0 +1,103 @@
+<form [formGroup]='myForm'>
+  <ion-card *ngIf="!hideCard" >
+    <ion-grid #grid>
+        <ion-row>
+          <ion-col class="ion-align-self-center" style="margin-top: 1pt;">
+            <p class="message" [innerHTML]="message"></p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <pistola-client [myForm]="myForm" nameControl="client" (sendMessage)="validateClient($event)"
+            #client></pistola-client>
+          </ion-col>
+        </ion-row>
+      <ion-row style="margin-top: 2px;">
+        <ion-col>
+          <pistola-location [myForm]="myForm" nameControl="sourceLocation" (sendMessage)="validateSourceLocation($event)"
+             uppercase autofocus #sourceLocation></pistola-location>
+        </ion-col>
+        <ion-col>
+          <pistola-lp [myForm]="myForm" nameControl="sourceLP" (sendMessage)="validateSourceLP($event)" 
+            [checkLocation]="sourceLocationId" uppercase #sourceLP></pistola-lp>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-item [myForm]="myForm"  nameControl="item" [clientId]="this.selectedClient?.data.clientId"
+            (sendMessage)="validateSourceItem($event)" [checkLocation]="sourceLocation"  #sourceItem>
+          </pistola-item>
+        </ion-col>
+        <ion-col>
+          <pistola-qty [myForm]="myForm" nameControl="qty" (sendMessage)="validateSourceQty($event)" [maxValue]="max"
+            minValue="1" #sourceQty>
+          </pistola-qty>
+        </ion-col>
+      </ion-row>
+      <ion-row [hidden]="!isPrestigeItem">
+        <ion-col>
+          <pistola-input [myForm]="myForm"  nameControl="sourceLotNumber" label="Lot Number"
+            (sendMessage)="validateSourceLotNumber($event)"  [required]="false" #sourceLotNumber>
+          </pistola-input>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-row style="text-align: center;">
+        <ion-col>
+          <ion-button  color="primary" (click)="resetForm()">Clear</ion-button>
+          <ion-button color="danger" *ngIf="btnMoveAllVisible" (click)="LPMove()">Move All</ion-button>
+          <ion-button color="danger" *ngIf="items.length >0" (click)="validateCard()">Finish Move </ion-button>
+          <ion-button *ngIf="items.length > 0" color="medium" (click)="presentModalDetail()">Detail</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card [hidden]="!hideCard">
+  <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center" style="margin-top: 1pt;">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col>
+        <pistola-location [myForm]="myForm" nameControl="destLocation" (sendMessage)="validateDestLocation($event)"
+         label='Destination Location' uppercase #destLocation></pistola-location>
+      </ion-col>
+      <ion-col>
+        <pistola-lp [myForm]="myForm" nameControl="destLP" (sendMessage)="validateDestLP($event)" 
+        [newLP]='true' [checkLocation]="destLocationId" label='Destination LP' uppercase #destLP></pistola-lp>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <pistola-item [myForm]="myForm"  nameControl="item" 
+        (sendMessage)="validateDestItem($event)"  (keydown.enter)="getItemId()" [clientId]="clientId" uppercase #destItem>
+      </pistola-item>
+      </ion-col>
+      <ion-col>
+        <pistola-qty [myForm]="myForm" nameControl="qty" (sendMessage)="validateDestQty($event)" [maxValue]="max"
+        minValue="1" #destQty>
+      </pistola-qty>
+      </ion-col>
+    </ion-row>    
+    <ion-row [hidden]="!isPrestigeItem">
+      <ion-col>
+        <pistola-input [myForm]="myForm"  nameControl="destLotNumber" label="Lot Number"
+          (sendMessage)="validateDestLotNumber($event)"  [required]="false" #destLotNumber>
+        </pistola-input>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row style="text-align: center;">
+      <ion-col>
+        <ion-button  color="primary" (click)="resetDestForm()">Clear</ion-button>
+        <ion-button color="danger" *ngIf="btnMoveAllVisible" (click)="LPMove()">Move All</ion-button>
+        <ion-button *ngIf="items.length > 0" color="medium" (click)="presentModalDetail()">Detail</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+</form>

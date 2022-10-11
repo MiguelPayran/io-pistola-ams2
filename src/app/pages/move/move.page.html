@@ -1,0 +1,42 @@
+<ion-content>
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 55px;">
+     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+        <ion-fab-button (click)="fabClick('LP Move')">
+          <ion-icon name="cube"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button (click)="fabClick('Decrement')">
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button (click)="fabClick('Increment')">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button (click)="fabClick('Move')">
+          <ion-icon name="move"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab> 
+
+    <div [ngSwitch]="title">
+      <div *ngSwitchCase="'LP Move'">
+        <movelp #moveLP></movelp>
+      </div>
+
+      <div *ngSwitchCase="'Increment'">
+        <app-adjust [sign]="sign" [title]="title"  #adjustInc></app-adjust>
+      </div>
+
+      <div *ngSwitchCase="'Decrement'">
+        <app-adjust [sign]="sign" [title]="title"  #adjustDec></app-adjust>
+      </div>
+      <div *ngSwitchDefault>
+        <moveitem #moveitem  ></moveitem>
+      </div>
+    </div>
+  </div>

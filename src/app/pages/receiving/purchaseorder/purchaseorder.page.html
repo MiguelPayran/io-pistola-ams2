@@ -1,0 +1,33 @@
+<ion-content>
+  <div class="ams-form">
+    <form [formGroup]="formGroup">      
+      <ion-list lines="none">
+        <pistola-client [myForm]="formGroup" nameControl="client" (sendMessage)="validateClient($event)"
+        #client></pistola-client>
+        <pistola-location [myForm]="formGroup"
+        (sendMessage)="validateLocationMessage($event)" #stagingLocation></pistola-location>
+        <pistola-input [myForm]="formGroup" nameControl="cartonId" label="Carton ID" [required]="true"
+          (sendMessage)="validateCartonId($event)" #cartonId></pistola-input>
+
+        <ion-item>
+          <ion-label position="floating"><b>PO Number</b></ion-label>
+          <ion-input #poNumber formControlName="poNumber" type="text" uppercase></ion-input>
+        </ion-item>
+        <pistola-input [myForm]="formGroup" nameControl="licensePlate" [label]="licenseTo" [required]="true"
+          (sendMessage)="validateLicensePlate($event)" #licensePlate></pistola-input>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="readyToSave">
+  <ion-grid>
+    <ion-row class="ion-justify-content-end">
+      <ion-col size="6">
+        <div style="text-align: right;">
+          <ion-button (click)="validateLicensePlate()" color="secondary"><b>Save Qty</b></ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

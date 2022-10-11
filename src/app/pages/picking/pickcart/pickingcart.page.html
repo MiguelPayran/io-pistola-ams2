@@ -1,0 +1,70 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-zone [myForm]="formGroup" [label]="labelZone" nameControl="zone"
+            (sendMessage)="validateZone($event)" uppercase #zone></pistola-zone>
+        </ion-col>
+        <ion-col size="6">
+          <pistola-input [myForm]="formGroup" label="Location" nameControl="location"
+            (sendMessage)="validateLocation($event)" [textCompare]="workData.sourceLocation" #location>
+          </pistola-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <pistola-input [myForm]="formGroup" label="Item" nameControl="item"
+            (sendMessage)="validateItem($event)" [textCompare]="workData.displayItemNumber" #item></pistola-input>
+        </ion-col>
+        <ion-col class="ion-align-self-center">
+          <pistola-qty [label]='labelQuantity' [itemNumber]='workData.itemNumber' [location]='workData.sourceLocation'
+            minValue='0' [maxValue]='workData.plannedQuantity' [myForm]="formGroup" [zeroqty]="true"
+            nameControl="quantity" (sendMessage)="validateQuantity($event)" #quantity></pistola-qty>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>        
+        <ion-col>
+          <pistola-input [myForm]="formGroup" label="Tote" [textCompare] = "workData?.destinationLP" nameControl="tote"
+            (sendMessage)="validateTote($event)"  #tote></pistola-input>
+        </ion-col>
+        <ion-col class="ion-align-self-center  ion-text-center">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="ion-align-self-center">
+                <ion-button *ngIf="shrtBtn" color="medium" (click)="alertShortPickZero(1)">Short Pick
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-row class="ion-justify-content-end">
+                  <ion-toggle (ionChange)="onToggleHospital($event.detail.checked)" [disabled]="dataRedis.toogleHospDisable" [checked]="dataRedis.hospitalPick">
+                  </ion-toggle>
+                  <ion-label style="margin-top: 12px; font-weight: bold;font-size: 12px;"  >Hosp Pick</ion-label>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col *ngIf="hasItems()" class="ion-align-self-center ion-text-center">
+          <ion-button  color="medium" (click)="modalCloseTote(true)">Close Pick</ion-button>
+          <ion-button  color="medium" (click)="getDetail()">Detail</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-chip [color]="tote.close?'success':'secondary'" (click)="tote.close? null:alertFullTote(tote);"  *ngFor="let tote of dataRedis.totes">
+            <ion-label  >{{tote.name}}</ion-label>
+          </ion-chip>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

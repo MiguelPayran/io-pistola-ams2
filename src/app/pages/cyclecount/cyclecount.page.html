@@ -1,0 +1,45 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <pistola-location [myForm]="formGroup" label="Location" nameControl="location"
+            (sendMessage)="validateLocation($event)" #location>
+          </pistola-location>
+        </ion-col>
+        <ion-col size="6">
+          <pistola-lp [myForm]="formGroup" label="LP" nameControl="lp" (sendMessage)="validateLP($event)"
+            [emptyLP]='false' #lp></pistola-lp>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <pistola-item [myForm]="formGroup" [label]="labelItem" nameControl="item" [required]="true" [clientId]="0"
+            (sendMessage)="validateItem($event)" #item></pistola-item>
+        </ion-col>
+
+        <ion-col size="6" class="ion-align-self-center">
+          <pistola-qty [label]='labelQuantity' [itemNumber]='workData.itemNumber' [location]='workData.sourceLocation'
+            minValue='0' maxValue='1000' [myForm]="formGroup" [zeroqty]="true" (sendMessage)="validateQuantity($event)"
+            #quantity></pistola-qty>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <ion-row class="ion-justify-content-end">
+            <ion-toggle (ionChange)="onToggleAutomatic($event.detail.checked)" [checked]="isAutomatic">
+            </ion-toggle>
+            <ion-label style="margin-top: 12px; font-weight: bold;font-size: 12px;">Automatic</ion-label>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</form>

@@ -1,0 +1,9 @@
+<div [formGroup]="myForm">
+<ion-item class="input">
+    <ion-label position="floating"><b>{{label}}</b></ion-label>
+    <ion-input  type="number"  (keyup.enter)="checkQuantity($event)"
+    [formControlName]="nameControl"></ion-input>    
+</ion-item>
+</div>
+
+

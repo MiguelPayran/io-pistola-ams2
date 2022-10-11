@@ -1,0 +1,26 @@
+ion-button {
+  --color: #fff;
+  --background: #5d3154;
+}
+
+ion-content {
+  --background: #5d3154;
+}
+
+.table-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+.card-container{
+  background-color: #FFFFFF;
+  border-radius: 5px; 
+  padding: 0px 8px;
+  p{
+    font-size: 14px;
+    color: #5d3154;
+  }
+  span{
+    font-weight: bold;
+  }
+}

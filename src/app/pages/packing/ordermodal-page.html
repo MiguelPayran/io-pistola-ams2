@@ -1,0 +1,36 @@
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-title><b>Order Number: {{data.details[0].orderNumber}}</b></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="user-select: text;">
+  <div class="ams-form" style="margin-top: 5px; all: inherit; ">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <b>Products</b>
+          </ion-col>
+          <ion-col>
+            <b>Packed Needed</b>
+          </ion-col>
+          <ion-col>
+            <b>Packed</b>
+          </ion-col>
+        </ion-row>
+        <ion-list *ngFor="let detail of data.details;">
+          <ion-row
+            [ngClass]="{'noMatch': detail.quantityOrdered != detail.quantityScanned, 'match':  detail.quantityOrdered == detail.quantityScanned}">
+            <ion-col *ngIf="detail.displayItemNumber"><b>{{detail.displayItemNumber}}</b></ion-col>
+            <ion-col style="margin-left: 65px;"><b>{{detail.quantityOrdered}}</b></ion-col>
+            <ion-col style="margin-left: 45px;"><b>{{detail.quantityScanned}}</b></ion-col>
+          </ion-row>
+        </ion-list>
+      </ion-grid>
+    </ion-card-content>
+
+  </div>
+</ion-content>

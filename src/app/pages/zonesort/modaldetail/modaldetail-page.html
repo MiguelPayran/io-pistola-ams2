@@ -1,0 +1,44 @@
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-title><b>Container: {{data.tote}}</b></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="user-select: text;">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <b>UPC</b>
+            </ion-col>
+            <ion-col>
+              <b>Split</b>
+            </ion-col>
+            <ion-col>
+              <b>Location</b>
+            </ion-col>
+            <ion-col>
+              <b>Quantity</b>
+            </ion-col>
+          </ion-row>
+          <ion-list  *ngFor="let detail of data.detail">
+          <ion-row [ngClass]="{'split1': detail.split == 1,'split2': detail.split == 2,'split3': detail.split == 3,'split4': detail.split == 4,'split0': detail.split == 0}">
+            <ion-col>{{detail.displayItemNumber}}
+            </ion-col>
+            <ion-col>{{detail.split}}
+            </ion-col>
+            <ion-col>{{detail.locationId}}
+            </ion-col>
+            <ion-col>{{detail.qty}}
+            </ion-col>
+          </ion-row>
+        </ion-list>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>

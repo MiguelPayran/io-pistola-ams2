@@ -1,0 +1,32 @@
+<form [formGroup]='myForm'>
+  <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <pistola-location [myForm]="myForm" nameControl="fromLocation" (sendMessage)="validateLocation($event)"
+              uppercase #loc1></pistola-location>
+          </ion-col>
+          <ion-col>
+            <pistola-lp [myForm]="myForm" nameControl="fromLP" [checkLocation]="fromLocationId"
+              (sendMessage)="validateLP($event)" uppercase #lp1></pistola-lp>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size=6>
+            <pistola-location [myForm]="myForm" nameControl="toLocation" label='Destination Location'
+              (sendMessage)="validateDestLocation($event)" uppercase #loc2>
+            </pistola-location>
+          </ion-col>
+          <ion-col size=6>
+            <pistola-lp [myForm]="myForm" nameControl="toLP" label='Destination LP'
+              (sendMessage)="validateDestLP($event)" [newLP]='true' uppercase #lp2></pistola-lp>
+          </ion-col>
+        </ion-row>
+        <ion-row style="text-align: center;">
+          <ion-col>
+            <ion-button color="primary" (click)="resetForm()">Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+</form>

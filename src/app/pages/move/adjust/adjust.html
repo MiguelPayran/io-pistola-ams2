@@ -1,0 +1,42 @@
+<form [formGroup]='formGroup'>
+  <ion-card>
+    <ion-grid style="margin-top: 6px;">
+      <ion-row>
+        <ion-col>
+          <pistola-client [myForm]="formGroup" nameControl="client" (sendMessage)="validateClient($event)"
+          #client></pistola-client>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-location [myForm]="formGroup" (sendMessage)="validateLocation($event)" #location>
+          </pistola-location>
+        </ion-col>
+        <ion-col>
+          <pistola-lp [myForm]="formGroup" nameControl="lp" (sendMessage)="validateLP($event)"
+            [checkLocation]="locationId" [newLP]='newLP' #lp></pistola-lp>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-item [myForm]="formGroup" (sendMessage)="validateItem($event)" [checkLocation]="locationId" #item [clientId]="this.selectedClient?.data.clientId">
+          </pistola-item>
+        </ion-col>
+        <ion-col>
+          <pistola-qty [myForm]="formGroup" nameControl="qty" (sendMessage)="validateQty($event)" minValue="1"
+            [maxValue]="max" #quantity>
+          </pistola-qty>
+        </ion-col>
+      </ion-row>
+      <ion-row [hidden]="!isPrestigeItem">
+        <ion-col>
+          <pistola-input [myForm]="formGroup" nameControl="lotNumber" label="Lot Number"
+            (sendMessage)="validateLotNumber($event)" [required]="false" #lotNumber>
+          </pistola-input>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</form>

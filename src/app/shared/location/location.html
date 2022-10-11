@@ -1,0 +1,8 @@
+<div [formGroup]="myForm">
+    <ion-item class="input">
+        <ion-label position="floating"><b>{{label}}</b></ion-label>
+        <ion-input  (keyup.enter)="checkLocation($event)" [formControlName]="nameControl"
+            uppercase>
+        </ion-input>
+    </ion-item>
+</div>

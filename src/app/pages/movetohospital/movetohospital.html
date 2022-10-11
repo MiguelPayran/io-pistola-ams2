@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 53px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-zone [myForm]="formGroup" label="Putwall" nameControl="putwall"
+            (sendMessage)="validatePutwall($event)" #putwall uppercase></pistola-zone>
+          <pistola-input #container [myForm]="formGroup" label="Container" uppercase
+            (sendMessage)="validateContainer($event)" nameControl="container"></pistola-input>
+        </ion-col>
+        <ion-col>
+          <pistola-location #location [myForm]="formGroup" nameControl="location"
+            (sendMessage)="validateLocation($event)">
+          </pistola-location>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

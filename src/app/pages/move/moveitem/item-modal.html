@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-row>
+      <ion-col style="margin-left: 25px;">
+        <h5>Items</h5>
+      </ion-col>
+      <ion-col [hidden]="!hasLotNumber">
+        <h5>Lot Number</h5>
+      </ion-col>
+      <ion-col>
+        <h5>Quantity</h5>
+      </ion-col>
+    </ion-row>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="user-select: text;">
+  <ion-list>
+    <ion-item *ngFor="let item of data.items">
+      <ion-grid #grid>
+        <ion-row>
+          <ion-col>
+            {{item.displayItemNumber}}
+          </ion-col>
+          <ion-col [hidden]="!hasLotNumber">
+            {{item.lotNumber}}
+          </ion-col>
+          <ion-col>
+            {{item.quantity}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,148 @@
+<form [formGroup]='myForm'>
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 53px;">
+    <div style="display: table-row;">
+      <div style="display: table-cell;">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-align-self-center">
+                    <b style="font-weight: bold;">LP Audit</b>
+                  </ion-col>
+                  <ion-col>
+                    <ion-row class="ion-justify-content-end">
+                      <ion-toggle (ionChange)="onToggleBtnChange($event.detail.checked)" [checked]="singleUnit">
+                      </ion-toggle>
+                      <ion-label style="margin-top: 12px; font-weight: bold;font-size: 12px;">Single Unit.</ion-label>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <pistola-location [myForm]="myForm" (sendMessage)="locationMessage($event)" #inputLocation>
+                  </pistola-location>
+                </ion-col>
+                <ion-col>
+                  <pistola-lp [myForm]="myForm" (sendMessage)="lpMessage($event)" [checkLocation]="location?.value" #lp>
+                  </pistola-lp>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div style="display: table-row;">
+      <div style="display: table-cell;">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-grid>
+
+                <ion-row>
+                  <ion-col>
+                    <b style="font-weight: bold;">Scan Items
+                    </b>
+                  </ion-col>
+                  <ion-col size="auto" class="ion-text-end">
+                    <div class=.ion-float-right>
+                      <ion-button color="secondary" *ngIf="items?.length > 0 && isFinished == false"
+                        (click)="submitAudit()">
+                        <b>Done</b>
+                      </ion-button>
+                      <ion-button color="medium" *ngIf="items?.length > 0 && isFinished == false" (click)="clear()">
+                        Clear
+                      </ion-button>
+                      <ion-button color="medium" *ngIf="showButtonBack" (click)="scanItem()">
+                        <ion-icon name="arrow-undo-outline"></ion-icon>
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <div style="width: 100%; display: table;">
+              <div style="display: table-row;">
+                <div style="width: 50%; display: table-cell;">
+                  <pistola-item [myForm]="myForm" (sendMessage)="itemMessage($event)" #item>
+                  </pistola-item>
+                </div>
+                <div style="display: table-cell; ">
+                  <pistola-qty [myForm]="myForm" (sendMessage)="quantityMessage($event)" [maxValue]="maxValue" #qty></pistola-qty>
+                </div>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</form>
+<ion-content>
+  <div>
+    <ion-list *ngIf="items?.length > 0" style="height: 100%;overflow: auto;">
+      <ion-list-header>
+        <ion-grid>
+          <ion-row class="ion-padding-end">
+            <ion-col>
+              <h5>UPC</h5>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <h5>Scanned Qty</h5>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="showResults">
+              <h5>Pass/Fail</h5>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let item of items;">
+        <ion-item>
+
+          <ion-grid #grid>
+            <ion-row>
+              <ion-col> {{item.upc}}
+              </ion-col>
+              <ion-col class="ion-text-center">{{item.scannedQuantity}}
+              </ion-col>
+              <ion-col class="ion-text-end" *ngIf="showResults">
+                <div *ngIf="item.actualQuantity === item.scannedQuantity">
+                  <ion-icon name="checkmark-done-circle-outline" color="success"></ion-icon> <span class="text-success">
+                    Pass</span>
+                </div>
+                <div
+                  *ngIf="item.scannedQuantity != item.actualQuantity && item.scannedQuantity != 0 &&  item.actualQuantity != 0">
+                  <ion-icon name="alert-circle-outline" color="danger"></ion-icon> <span class="text-danger">
+                    Fail</span>
+                </div>
+                <div *ngIf="item.scannedQuantity === 0 && item.actualQuantity != 0">
+                  <ion-icon name="search-circle-outline" color="primary"></ion-icon> <span class="text-primary">
+                    Missing</span>
+                </div>
+                <div *ngIf="item.scannedQuantity > 0 && item.actualQuantity === 0">
+                  <ion-icon name="bookmarks-outline" color="danger"></ion-icon> <span class="text-secondary">
+                    Extra</span>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="removeItem(item)">Delete</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+  </div>
+</ion-content>

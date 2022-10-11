@@ -1,0 +1,10 @@
+<div [formGroup]="myForm">
+<ion-list>
+    <ion-item>
+      <ion-label>Select Client</ion-label>
+      <ion-select placeholder="Select One" [formControlName]="nameControl" id="client" (ionChange)="selectChange($event)" [compareWith]="compareFn" >
+        <ion-select-option  *ngFor="let client of clients" [value]="client.clientId" >{{client.clientName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>

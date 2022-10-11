@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 53px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-location [myForm]="formGroup" nameControl="location" (sendMessage)="validateLocation($event)"
+            #location>
+          </pistola-location>
+        </ion-col>
+        <ion-col>
+          <pistola-lp [myForm]="formGroup" nameControl="tote" [label]="labelContainer" (sendMessage)="validateTote($event)"
+            [checkLocation]="getValueInput('location')" #tote></pistola-lp>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-item [myForm]="formGroup" nameControl="item" label="Item" (sendMessage)="validateItem($event)"  [detail] = "false"  [clientId]="this.clientId"
+            [checkLocation]="getValueInput('location')" #item></pistola-item>
+        </ion-col>
+        <ion-col>
+          <pistola-input [myForm]="formGroup" nameControl="container" label="Container"
+            (sendMessage)="validateContainer($event)" #container></pistola-input>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="workData?.adCode">
+        <ion-col size="7">
+          <ion-chip (click)="createPopover()">
+            <ion-label>{{workData?.adCode}}</ion-label>
+            <ion-icon name="document-outline"></ion-icon>
+          </ion-chip>
+        </ion-col>
+        <ion-col size="3">
+          <ion-thumbnail>
+            <img src="assets/img/inserts/adcodethumbnail.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col>
+          <ion-icon *ngIf="showbtnHospital" name="bandage-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

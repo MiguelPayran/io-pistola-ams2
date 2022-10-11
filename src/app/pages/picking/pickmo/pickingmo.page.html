@@ -1,0 +1,54 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-input [myForm]="formGroup" [label]="labelWave" nameControl="wave"
+            (sendMessage)="validateWave($event)" uppercase #wave></pistola-input>
+        </ion-col>
+        <ion-col>
+          <pistola-lp [myForm]="formGroup" label="Tote" nameControl="container"
+            (sendMessage)="validateContainer($event)" [emptyLP]='true' #container></pistola-lp>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <pistola-location [myForm]="formGroup" label="Location" nameControl="location"
+            (sendMessage)="validateLocation($event)" #location>
+          </pistola-location>
+        </ion-col>
+
+        <ion-col size="6">
+          <pistola-lp [myForm]="formGroup" label="LP" nameControl="lp" (sendMessage)="validateLP($event)" #lp>
+          </pistola-lp>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <pistola-input [myForm]="formGroup" [label]="labelItem" nameControl="item"
+            (sendMessage)="validateItem($event)" [textCompare]="workData.displayItemNumber" #item></pistola-input>
+        </ion-col>
+        <ion-col class="ion-align-self-center">
+          <pistola-qty [label]='labelQuantity' [itemNumber]='workData.itemNumber' [location]='workData.sourceLocation'
+            minValue='0' [maxValue]='workData.maxPlannedQuantity' [myForm]="formGroup" [zeroqty]="true"
+            nameControl="quantity" (sendMessage)="validateQuantity($event)" #quantity></pistola-qty>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: 70px;">
+        <ion-col class="ion-align-self-center ion-text-center">
+          <ion-button *ngIf="shrtBtn" color="medium" (click)="presentAlertShortPickZero(1)">Short Pick</ion-button>
+          <ion-button *ngIf="details.length > 0" color="medium" (click)="fullTote(true)">Full Tote</ion-button>
+          <ion-button *ngIf="details.length > 0" color="medium" (click)="presentModalDetail()">Detail</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+</form>

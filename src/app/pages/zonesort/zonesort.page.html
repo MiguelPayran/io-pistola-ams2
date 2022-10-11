@@ -1,0 +1,55 @@
+<form [formGroup]="formGroup">
+    <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+        <ion-grid #grid>
+            <ion-row>
+                <ion-col class="ion-align-self-center">
+                    <p class="message" [innerHTML]="message"></p>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                    <pistola-location [myForm]="formGroup" label="{{ 'SOURCE_LOC' | translate }}"
+                        nameControl="sourceLocation" (sendMessage)="validateSourceLocation($event)" #sourceLocation>
+                    </pistola-location>
+                </ion-col>
+                <ion-col size="6">
+                    <pistola-lp [myForm]="formGroup" nameControl="tote" [label]="labelTote"
+                        (sendMessage)="validateTote($event)" [checkLocation]="getValueInput('sourceLocation')" #tote>
+                    </pistola-lp>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                    <ion-list>
+                        <pistola-item [myForm]="formGroup" (sendMessage)="validateItem($event)" #item [detail]="false" clientId="1">
+                        </pistola-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-list>
+                        <pistola-input [myForm]="formGroup" nameControl="destLocation" label="Location"
+                            (sendMessage)="validateDestLocation($event)" [textCompare]="destinationLocation"
+                            #destLocation></pistola-input>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                    <pistola-lp [myForm]="formGroup" nameControl="destHuId" [newLP]='newLP' #destHuId 
+                    (sendMessage)="validateDestHu($event)">
+                    </pistola-lp>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button *ngIf="showBtnTote" (click)="rescan()">Rescan</ion-button>
+                    <ion-button *ngIf="showBtnTote" (click)="detailLP()">Detail</ion-button>
+              
+                </ion-col>
+            </ion-row>
+
+
+        </ion-grid>
+    </div>
+</form>

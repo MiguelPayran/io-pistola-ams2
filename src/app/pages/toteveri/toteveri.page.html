@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+            <p class="message" [innerHTML]= "message"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-lp [myForm]="formGroup" label="Tote" nameControl="tote"
+            (sendMessage)="validateTote($event)" #tote></pistola-lp>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

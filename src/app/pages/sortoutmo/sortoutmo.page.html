@@ -1,0 +1,54 @@
+<form [formGroup]="formGroup">
+    <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+        <ion-grid #grid>
+            <ion-row>
+                <ion-col class="ion-align-self-center">
+                    <p class="message" [innerHTML]= "message"></p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col size="6">
+                      <pistola-input [myForm]="formGroup" label="Wave"
+                          nameControl="wave" (sendMessage)="validateWave($event)"
+                          #wave></pistola-input>
+                  </ion-col>
+                  <ion-col size="6">
+                    <pistola-location [myForm]="formGroup" label="{{ 'SOURCE_LOC' | translate }}"
+                        nameControl="sourceLocation" (sendMessage)="validateSourceLocation($event)"
+                        #sourceLocation></pistola-location>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                  <ion-col size="6">
+                      <pistola-lp [myForm]="formGroup" nameControl="sourceLP" [label]="labelLP"
+                          (sendMessage)="validateSourceLP($event)"
+                          [checkLocation]="getValueInput('sourceLocation')" #sourceLP></pistola-lp>
+                  </ion-col>
+                  <ion-col size="6">
+                          <pistola-item [myForm]="formGroup"  (sendMessage)="validateItem($event)" #item  [detail] = "false">
+                          </pistola-item>
+                  </ion-col>
+              </ion-row>
+
+            <ion-row>
+                <ion-col size="6">
+                  <pistola-qty label='Quantity' 
+                    minValue='0' [maxValue]='workData.plannedQuantity' [label]='labelQuantity' [myForm]="formGroup" [zeroqty]="true" nameControl="quantity"
+                    (sendMessage)="validateQuantity($event)" #quantity></pistola-qty>
+                </ion-col>
+                <ion-col size="6">
+                        <pistola-input [myForm]="formGroup" nameControl="container" label="Container"
+                            (sendMessage)="validateContainer($event)"
+                            [textCompare]="workData.destinationLP" #container></pistola-input>
+                </ion-col>
+            </ion-row>
+            <ion-row  style="height: 70px;">
+                <ion-col class="ion-align-self-center ion-text-center">
+                  <ion-button *ngIf="fullContainer" color="medium" (click)="presentModalContainer(this.workData.orderNumber,true)">Full Container</ion-button>
+                  <ion-button *ngIf="scanLP" color="medium" (click)="scanOtherLP()">Scan Tote</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</form>

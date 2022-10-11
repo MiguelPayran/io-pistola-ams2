@@ -1,0 +1,51 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 50px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+            <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+    </ion-row>
+    
+    <ion-row [hidden]="!isSD">
+      <ion-col size="6">
+          <pistola-location [myForm]="formGroup" label="Location"
+              nameControl="sourceLocation" (sendMessage)="validateSourceLocation($event)"
+              #sourceLocation></pistola-location>
+      </ion-col>
+      <ion-col size="6">
+          <pistola-lp [myForm]="formGroup" nameControl="gaylord" label="Gaylord/Tote"
+              (sendMessage)="validateGaylord($event)"
+              [checkLocation]="getValueInput('sourceLocation')" #gaylord></pistola-lp>
+      </ion-col>
+  </ion-row>
+    <ion-row>
+      <ion-col size="6">
+              <pistola-item [myForm]="formGroup" (sendMessage)="validateItem($event)" clientId = "1" #item >
+              </pistola-item>
+      </ion-col>
+      <ion-col size="6">
+        <pistola-location [myForm] = "formGroup" nameControl ="destLocation" (sendMessage)="validateDestLocation($event)"
+        #destLocation>                    
+        </pistola-location>
+      </ion-col>
+  </ion-row>
+<ion-row>
+    <ion-col size ="6">
+        <pistola-lp [myForm]="formGroup" nameControl="destHu" [newLP]='newLP' #destHu 
+        (sendMessage)="validateDestHu($event)">
+        </pistola-lp>
+    </ion-col>
+    <ion-col>
+      <ion-row class="ion-justify-content-end">
+        <ion-toggle (ionChange)="onToggleSanDiego($event.detail.checked)" [checked]="isSD"  [disabled]="isSDDisabled">
+        </ion-toggle>
+        <ion-label style="margin-top: 12px; font-weight: bold;font-size: 12px;">From San Diego</ion-label>
+      </ion-row>
+    </ion-col>
+</ion-row>
+
+
+      </ion-grid>
+  </div>
+</form>

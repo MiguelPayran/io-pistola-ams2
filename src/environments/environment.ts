@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    hmr       : false,
+    // API_URL: 'https://pistola.adoremeservices.com/app/api'
+        API_URL: 'http://localhost:5000/api'
+    //  API_URL: 'http://hj-prod-iis-1.ams.corp:9002/api'
+     //API_URL: 'http://hj-test-iis-1.ams.corp:9002/api'
+    //API_URL: 'https://prd.pistola.adoremeservices.com/app/api'
+   // API_URL: 'http://pistola-poc:9073/api'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

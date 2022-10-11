@@ -1,0 +1,51 @@
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-item detail="false" lines="none" class="speaker-item">
+
+        <ion-label>
+          <div class="login-logo">
+            <img src="../assets/img/logos/ams2.png" alt="Ionic logo">
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item detail="false">
+          <ion-label>
+            <h3 style="text-align: center;font-size: 18px;">LOGIN INTO YOUR ACCOUNT</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="ams-form">
+        <form name="loginForm" [formGroup]="loginForm">
+          <ion-list>
+            <ion-item class="input">
+              <ion-label position="stacked">User</ion-label>
+              <ion-input #username (keydown.enter)="validateUsername()" formControlName="username" type="text"
+                [value]="loginForm.get('username').value" uppercase></ion-input>
+
+              <ion-icon name="person-circle-outline" slot="end" class="ion-align-self-center"></ion-icon>
+            </ion-item>
+
+            <ion-item class="input">
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input #password (keydown.enter)="login()" formControlName="password" type="password"></ion-input>
+              <ion-icon name="key-outline" slot="end" class="ion-align-self-center"></ion-icon>
+            </ion-item>
+
+            <ion-row>
+              <ion-col>
+                <ion-button (click)="login()" expand="block">LOGIN</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

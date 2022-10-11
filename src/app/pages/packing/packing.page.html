@@ -1,0 +1,60 @@
+<form [formGroup]="formGroup">
+  <div class="ams-form" style="width: 100%; display: table;margin-top: 53px;">
+    <ion-grid #grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center" [size]="showBtnPack?9:12">
+          <p class="message" [innerHTML]="message"></p>
+        </ion-col>
+        <ion-col *ngIf="showBtnPack"  size="3">
+          <div style="float: right">
+          <ion-button color="success" (click)="clickPack()" float-right>Pack</ion-button>
+        </div></ion-col> 
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <pistola-zone [myForm]="formGroup" label="Putwall" nameControl="putwall"
+            (sendMessage)="validatePutwall($event)" #putwall uppercase></pistola-zone>
+        </ion-col>
+        <ion-col>
+          <pistola-input [myForm]="formGroup" label="Location" nameControl="location"
+            (sendMessage)="validateLocation($event)" [textCompare]="workData?.sourceLocation" #location uppercase>
+          </pistola-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>       
+          <pistola-item [myForm]="formGroup" label="Item" nameControl="item" [detail] = "false" [clientId]="this.clientId"
+            (sendMessage)="validateItem($event)" #item [keepFocus]="true"></pistola-item>              
+        </ion-col>
+        <ion-col>
+          <pistola-input #container [myForm]="formGroup" label="Scan Container" uppercase
+            (sendMessage)="validateContainer($event)" nameControl="container"></pistola-input>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="workData?.adCode">
+        <ion-col size="7">
+          <ion-chip (click)="createPopover()">
+            <ion-label>{{workData?.adCode}}</ion-label>
+            <ion-icon name="document-outline"></ion-icon>
+          </ion-chip>
+        </ion-col>
+        <ion-col size="3">
+          <ion-thumbnail>
+            <img src="assets/img/inserts/adcodethumbnail.png">
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col>
+          <ion-icon *ngIf="showBtnHospital" name="bandage-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-button *ngIf="itemlgth > 0" [ngClass]="{'extra' : extra =='noMatch'} " (click)="presentModalDetail()">Detail</ion-button>
+        <ion-button *ngIf="showBtnHospital" (click)="presentAlertHospitalPack()">Hospital</ion-button>
+        <ion-button *ngIf="showBtnRescan" (click)="rescan()">Rescan</ion-button>
+      </ion-row>
+      <ion-row>
+      </ion-row>
+    </ion-grid>
+  </div>
+</form>

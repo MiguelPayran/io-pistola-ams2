@@ -1,0 +1,41 @@
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+ion-card-header{
+  padding-bottom: 0px;
+}
+
+ion-card{
+  margin-inline: 6px;
+}
+
+ion-card-content {
+  padding: 2px;
+
+}
+ion-grid{
+  padding: 0px;
+}
+ion-col{
+  padding: 0px;
+}
+
+
+b {
+  font-weight: 500;
+}
+
+p {
+  padding: 0 40px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ion-color-step-600, #60646b);
+
+  b {
+    color: var(--ion-text-color, #000000);
+  }
+}
+
+
